@@ -1,7 +1,7 @@
 {
   "name": "tallerbot",
   "version": "0.0.0",
-  "description": "Facebook chat bot",
+  "description": "Facebook chat bot version nueva",
   "main": "index.js",
   "dependencies": {
     "express": "^4.15.3",
