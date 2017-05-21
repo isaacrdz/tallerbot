@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-const APP_TOKEN = 'EAATLqKYY1W8BAPQ0j2wEf20T3RZAnrHd7mfl7eihkN3dqpZAIFb32mpMooIS6uKwAg45GnQR4ZCt6haM9nNwPhcwiEkWfUXZBUfoIWDNHzJkg4iHQZAFgATNdAHUwCygFfLRm6d7Yp6dke047RJFQwwGxZCDDtpqv3KP3naKie0QZDZD';
+const APP_TOKEN = 'EAAQzevWH4z4BALCyEZAx5dIY95KCqfhGlUGmxt50vvTZByZBmFPAX3YxA75pycAOeRH0o0fXtpZBVefFHes82nngnHZAwQtVpndU3awjglANtJ7eutpvqXiJLhEyyj6kZCyPK6nr0KFmowzVFEmTHu8oeQlYDETrZAdWQvWqeebzQZDZD';
 
 var app = express();
 
@@ -65,6 +65,8 @@ function evaluateMessage(recipientId, message){
 
 	if(isContain(message, 'ayuda')){
 		finalMessage = 'Por el momento no te puedo ayudar';
+	} else if (isContain(message, 'gato')) {
+		sendMessageImage(recipientId)
 	} else {
 		finalMessage = 'Solo se repetir las cosas' + message;
 	}
@@ -79,6 +81,23 @@ function sendMessageText(recipientId, message){
 		},
 		message : {
 			text: message
+		}
+	};
+	callSendAPI(messageData);
+}
+
+function sendMessageImage(recipientId){
+	var messageData = {
+		recipient : {
+			id : recipientId
+		},
+		message : {
+			attachment:{
+				type: "image",
+				payload:{
+					url: "http://lorempixel.com/1440/500/"
+				}
+			}
 		}
 	};
 	callSendAPI(messageData);
